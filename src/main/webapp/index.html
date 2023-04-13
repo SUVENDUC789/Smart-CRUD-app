@@ -13,8 +13,7 @@
     <title>CRUD - app</title>
 </head>
 
-<body
-    style="background: url(https://cdn.pixabay.com/photo/2017/01/24/03/53/plant-2004483__340.jpg); background-size: cover; background-attachment: fixed;">
+<body>
 
     <div class="container my-3">
 
@@ -55,8 +54,9 @@
             <button type="submit" class="btn btn-primary" id="submit-data">Save</button>
         </form>
     </div>
-
-    <div class="container my-5" id="student-data">
+    
+    <div class="container text-center my-5" id="student-data">
+        
 
     </div>
 
@@ -76,6 +76,22 @@
 
     $(document).ready(function () {
 
+        function loadData() {
+            $.ajax({
+                url: "table",
+                type: "POST",
+                beforeSend:function(){
+                    $("#student-data").html("<h1>Loading data ...</h1>");
+                },
+                success: function (data) {
+                    $("#student-data").html(data);
+                }
+            });
+
+        }
+
+        loadData();
+
         $("#myform").submit(function (e) {
             e.preventDefault();
             let fn = $("#first-name").val();
@@ -89,11 +105,11 @@
                 type: "POST",
                 data: { first_name: fn, last_name: ln, gender: gen },
                 beforeSend: function () {
-                        $(".success-data").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    $(".success-data").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
                         <strong>${fn + " " + ln}</strong> Please wait ...
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`);
-                    
+
                 },
                 success: function (data) {
                     $(".success-data").html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -101,7 +117,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>`);
 
-
+                    loadData();
 
                     $("form").trigger("reset");
                 }
@@ -109,6 +125,9 @@
 
 
         });
+
+
+
 
     });
 
