@@ -92,6 +92,34 @@
 
         loadData();
 
+
+        $(document).on("click", ".update-btn", function () {
+            let id2 = $(this).data("id");
+            let element = this;
+
+            let first_name = prompt("Enter First Name : ");
+            let last_name = prompt("Enter last Name : ");
+
+            // console.log(first_name,last_name);
+
+            $.ajax({
+                url: "Update",
+                type: "POST",
+                data: { id: id2, fname: first_name, lname: last_name },
+                beforeSend:function(){
+                       $(".success-data").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <strong>Update SL = ${id2} </strong> ...
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>`);
+                },
+                success: function(){
+                    loadData();
+                }
+            });
+
+            alert(id + " " + first_name + " " + last_name);
+        });
+
         $(document).on("click", ".delete-btn", function () {
             let id = $(this).data("id");
             let element = this;
@@ -102,13 +130,13 @@
                 data: { sl: id },
                 beforeSend: function () {
                     $(".success-data").html(`<div class="alert alert-warning alert-dismissible fade show" role="alert">
-                        <strong>Delete ${id} </strong> ...
+                        <strong>Delete SL = ${id} </strong> ...
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>`);
                 },
                 success: function () {
                     //$(element).closest("tr").fadeOut();
-                	loadData();
+                    loadData();
                 }
             });
 

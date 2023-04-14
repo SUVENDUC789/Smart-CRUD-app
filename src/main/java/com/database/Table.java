@@ -32,6 +32,7 @@ public class Table extends HttpServlet {
 					+ "            <th>Last Name</th>\r\n" + "            <th>Gender</th>\r\n"
 					+ "            <th>Date of Admission</th>\r\n" + "        "
 					+ "            <th>Delete</th>\r\n" + "        "
+					+"<th>Update</th>"
 					+ "</tr>");
 
 			while (rs.next()) {
@@ -44,7 +45,7 @@ public class Table extends HttpServlet {
 
 				out.println("\r\n" + "        <tr>\r\n" + "            <td>" + sl + "</td>\r\n" + "            <td>"
 						+ fname + "</td>\r\n" + "            <td>" + lname + "</td>\r\n" + "            <td>" + gender
-						+ "</td>\r\n" + "            <td>" + dob + "</td>\r\n" + "  <td><button class='delete-btn' data-id='"+sl+"'>Delete</button> </td>       </tr>");
+						+ "</td>\r\n" + "            <td>" + dob + "</td>\r\n" + "  <td><button class='delete-btn' data-id='"+sl+"'>Delete</button> </td> " + "<td><button class='update-btn' data-id='"+sl+"'>Update</button> </td>"+ "      </tr>");
 			}
 
 			out.println("</table>");

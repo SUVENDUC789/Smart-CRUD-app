@@ -45,7 +45,29 @@ public class DB {
 				System.out.println(count + " row deleted");
 			else
 				System.out.println("No row deleted");
-			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static void updateRow(int id, String fname, String lname) throws Exception {
+		try {
+			String sql = "UPDATE students SET first_name=?,last_name=? WHERE sl = ?";
+			PreparedStatement ps = connectDB().prepareStatement(sql);
+
+			ps.setString(1, fname);
+			ps.setString(2, lname);
+			ps.setInt(3, id);
+
+			int count = ps.executeUpdate();
+
+			if (count > 0) {
+				System.out.println(count + " data Update ");
+			} else {
+				System.out.println("No data Update ");
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
